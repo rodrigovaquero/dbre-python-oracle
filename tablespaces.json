@@ -1,0 +1,21 @@
+[
+  {
+    "nome": "SYSTEM",
+    "total_gb": 200,
+    "usado_gb": 190
+  },
+  {
+     "nome": "USERS",
+     "total_gb": 500,
+     "usado_gb": 350
+  },
+  { 
+    "nome": "TEMP",
+    "total_gb": 100,
+    "usado_gb": 92
+  }  
+]
+
+
+ 
+   
