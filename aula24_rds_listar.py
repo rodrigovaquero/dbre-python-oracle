@@ -24,11 +24,17 @@ try:
     config=configuracao
     )
 
-    resposta = cliente_rds.describe_db_instances()
+    paginador = cliente_rds.get_paginator(
+    "describe_db_instances"
+    )
 
-    instancias = resposta["DBInstances"]
+    total_instancias = 0
 
-    print(f"Instâncias RDS encontradas: {len(instancias)}")
+    for pagina in paginador.paginate():
+        instancias = pagina["DBInstances"]
+        total_instancias += len(instancias)
+
+    print(f"Total de instâncias RDS: {total_instancias}")
         
 except (BotoCoreError, ClientError) as erro:
     raise SystemExit(f"ERRO AWS: {erro}") from erro
