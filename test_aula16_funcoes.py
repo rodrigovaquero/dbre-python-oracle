@@ -1,5 +1,5 @@
 import pytest
-from aula16_funcoes import calcular_percentual, classificar_status
+from dbre_calculos import calcular_percentual, classificar_status
 
 def test_calcular_percentual():
     resultado = calcular_percentual(500, 300)
