@@ -1,3 +1,4 @@
 oracledb==4.0.2
 pytest==9.1.1
 tzdata==2026.3
+boto3[crt]==1.43.86
