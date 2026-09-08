@@ -21,3 +21,5 @@ relatorio_*.csv
 # Instaladores e arquivos auxiliares do laboratório
 *.exe
 oraclelinux10-unattended-grub.cfg
+
+*.egg-info/

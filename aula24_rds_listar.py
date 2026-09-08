@@ -29,12 +29,30 @@ try:
     )
 
     total_instancias = 0
+    total_oracle = 0
+    total_disponiveis = 0
 
     for pagina in paginador.paginate():
         instancias = pagina["DBInstances"]
         total_instancias += len(instancias)
 
+        for db_instance in instancias:
+            if "oracle" in db_instance["Engine"]:
+                total_oracle += 1
+            if db_instance["DBInstanceStatus"] == "available":
+                total_disponiveis += 1
+
+    resumo = {
+        "total_rds": total_instancias,
+        "total_oracle": total_oracle,
+        "total_disponiveis": total_disponiveis 
+    }       
+    
+
+    print(F"Total de instâncias disponíveis: {total_disponiveis}")
     print(f"Total de instâncias RDS: {total_instancias}")
-        
+    print(f"Total de instâncias Oracle: {total_oracle}")
+    print(f"Resumo: {resumo}")       
+
 except (BotoCoreError, ClientError) as erro:
     raise SystemExit(f"ERRO AWS: {erro}") from erro

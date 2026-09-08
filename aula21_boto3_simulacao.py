@@ -20,7 +20,14 @@ instancias = resposta["DBInstances"]
 
 inventario_oracle = []
 
+engines_encontrados = set()
+
+contagem_engines = {}
+
 for db_instance in instancias:
+    engines_encontrados.add(db_instance["Engine"])
+    engine = db_instance["Engine"]
+    contagem_engines[engine] = contagem_engines.get(engine, 0) + 1
     if db_instance["Engine"].startswith("oracle"):
         print(f"ID: {db_instance['DBInstanceIdentifier']}")
         print(f"Engine: {db_instance['Engine']}")
@@ -31,6 +38,7 @@ for db_instance in instancias:
         else:
             status_multiaz = "Protegida"
         print(f"Status MultiAZ: {status_multiaz}")  
+             
 
         registro = {
             "identificador": db_instance["DBInstanceIdentifier"],
@@ -40,8 +48,13 @@ for db_instance in instancias:
             "status_multiaz": status_multiaz
         }
         inventario_oracle.append(registro)
+print(f"Engines encontradas: {engines_encontrados}")  
 
 print(inventario_oracle)        
+print(f"Quantidade de engines diferentes: {len(engines_encontrados)}")
+if "oracle-se2" in engines_encontrados:
+        print(f"Engine Oracle SE2 encontrada.")
+print(f"Contagem por engine: {contagem_engines}")        
 
 
      
